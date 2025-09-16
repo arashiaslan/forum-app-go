@@ -1,17 +1,13 @@
 package main
 
 import (
-	"net/http"
-
+	"github.com/arashiaslan/forum-app-go/internal/handlers/memberships"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+	membershipsHandler := memberships.NewHandler(r)
+	membershipsHandler.RegisterRoute()
 	r.Run(":9999") // listen and serve on 0.0.0.0:8080
 }
