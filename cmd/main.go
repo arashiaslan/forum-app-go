@@ -5,7 +5,10 @@ import (
 
 	"github.com/arashiaslan/forum-app-go/internal/configs"
 	"github.com/arashiaslan/forum-app-go/internal/handlers/memberships"
+	"github.com/arashiaslan/forum-app-go/pkg/internalsql"
 	"github.com/gin-gonic/gin"
+
+	membershipRepo "github.com/arashiaslan/forum-app-go/internal/repository/memberships"
 )
 
 func main() {
@@ -27,6 +30,13 @@ func main() {
 
 	cfg = configs.Get()
 	log.Println("config", cfg)
+
+	db, err:= internalsql.Connect(cfg.Database.DataSourceName)
+	if err != nil {
+		log.Fatalf("Failed to connect to database: %v", err)
+	}
+
+	_ = membershipRepo.NewRepository(db)
 
 	membershipsHandler := memberships.NewHandler(r)
 	membershipsHandler.RegisterRoute()
