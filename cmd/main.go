@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	membershipRepo "github.com/arashiaslan/forum-app-go/internal/repository/memberships"
+	membershipSvc "github.com/arashiaslan/forum-app-go/internal/service/memberships"
 )
 
 func main() {
@@ -36,9 +37,10 @@ func main() {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
 
-	_ = membershipRepo.NewRepository(db)
+	membershipRepo := membershipRepo.NewRepository(db)
+	membershipService := membershipSvc.NewService(membershipRepo)
 
-	membershipsHandler := memberships.NewHandler(r)
+	membershipsHandler := memberships.NewHandler(r, membershipService)
 	membershipsHandler.RegisterRoute()
 
 	r.Run(cfg.Service.Port)
