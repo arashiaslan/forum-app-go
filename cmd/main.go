@@ -16,7 +16,7 @@ func main() {
 	r := gin.Default()
 
 	var (
-		cfg *configs.Configs
+		cfg *configs.Config
 	)
 
 	err := configs.Init(
@@ -38,7 +38,7 @@ func main() {
 	}
 
 	membershipRepo := membershipRepo.NewRepository(db)
-	membershipService := membershipSvc.NewService(membershipRepo)
+	membershipService := membershipSvc.NewService(cfg, membershipRepo)
 
 	membershipsHandler := memberships.NewHandler(r, membershipService)
 	membershipsHandler.RegisterRoute()

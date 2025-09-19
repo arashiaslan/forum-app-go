@@ -1,5 +1,6 @@
 service:
   port: ":9999"
+  secretJWT: "forumappsecret"
   
 database:
   dataSourceName: "root:nope@tcp(localhost:3306)/forumapp"

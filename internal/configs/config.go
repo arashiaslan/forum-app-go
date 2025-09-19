@@ -4,7 +4,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-var config *Configs
+var config *Config
 
 type option struct {
 	configFolder []string
@@ -31,7 +31,7 @@ func Init(opts ...Option) error {
 	viper.SetConfigType(opt.configType)
 	viper.AutomaticEnv()
 
-	config = new(Configs)
+	config = new(Config)
 
 	err := viper.ReadInConfig()
 	if err != nil {
@@ -73,9 +73,9 @@ func WithConfigType(configType string) Option {
 	}
 }
 
-func Get() *Configs {
+func Get() *Config {
 	if config == nil {
-		config = &Configs{}
+		config = &Config {}
 	}
 
 	return config

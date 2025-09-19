@@ -1,8 +1,9 @@
 package memberships
 
-
 import (
 	"context"
+
+	"github.com/arashiaslan/forum-app-go/internal/configs"
 	"github.com/arashiaslan/forum-app-go/internal/model/memberships"
 )
 
@@ -12,9 +13,13 @@ type membershipRepository interface {
 }
 
 type service struct {
+	cfg *configs.Config
 	membershipRepo membershipRepository
 }
 
-func NewService(membershipRepo membershipRepository) *service {
-	return &service{membershipRepo: membershipRepo}
+func NewService(cfg *configs.Config, membershipRepo membershipRepository) *service {
+	return &service{
+		cfg: cfg,
+		membershipRepo: membershipRepo,
+	}
 }
