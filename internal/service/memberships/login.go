@@ -3,6 +3,7 @@ package memberships
 import (
 	"context"
 	"errors"
+	"fmt"
 
 	"github.com/rs/zerolog/log"
 	"golang.org/x/crypto/bcrypt"
@@ -31,6 +32,9 @@ func (s *service) Login(ctx context.Context, req memberships.LoginRequest) (stri
 	if err != nil {
 		return "", err
 	}
+
+	fmt.Printf("DEBUG username: %q\n", user.Username)
+
 
 	return token, nil
 }

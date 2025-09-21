@@ -21,7 +21,7 @@ type (
 
 type (
 	UserModel struct {
-		ID        int64    `db:"id"`
+		ID        int64  `db:"id"`
 		Email     string `db:"email"`
 		Username  string `db:"username"`
 		Password  string `db:"password"`
