@@ -16,10 +16,11 @@ func (h *Handler) CreatePost(c *gin.Context) {
 		return
 	}
 
-	err := h.postSvc.CreatePosts()(ctx, 0, request)
+	userID := c.GetInt64("userID")
+	err := h.postSvc.CreatePosts(ctx, userID, request)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusCreated, gin.H{"message": "post created successfully"})
+	c.JSON(http.StatusCreated, gin.H{"message": "post created successfully", "post": request})
 }

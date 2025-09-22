@@ -19,8 +19,8 @@ func (s *service) CreatePosts(ctx context.Context, userID int64, req posts.Creat
 		PostTitle:    req.PostTitle,
 		PostContent:  req.PostContent,
 		PostHashtags: postHastags,
-		CreatedAt:    now.String(),
-		UpdatedAt:    now.String(),
+		CreatedAt:    now.Format(time.RFC3339),
+		UpdatedAt:    now.Format(time.RFC3339),
 		CreatedBy:    strconv.FormatInt(userID, 10),
 		UpdatedBy:    strconv.FormatInt(userID, 10),
 	}
