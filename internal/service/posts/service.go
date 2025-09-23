@@ -8,7 +8,8 @@ import (
 )
 
 type postRepository interface {
-	CreatePosts(ctx context.Context, model posts.PostModel) error 
+	CreatePosts(ctx context.Context, model posts.PostModel) error
+	CreateComment(ctx context.Context,model posts.CommentModel) error
 }
 
 type service struct {
